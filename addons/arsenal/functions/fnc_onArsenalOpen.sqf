@@ -81,7 +81,7 @@ for "_index" from 0 to 10 do {
         };
 
         // Accs for the weapons above
-        case IDX_VIRT_ATTACHEMENTS: {
+        case IDX_VIRT_ATTACHMENTS: {
             private _array = LIST_DEFAULTS select _index;
             _array params ["_accsArray", "_magsArray"];
 

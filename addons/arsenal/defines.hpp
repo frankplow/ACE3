@@ -167,10 +167,8 @@
 
 // Indexes of virtual items array
 #define IDX_VIRT_WEAPONS 0
-#define IDX_VIRT_ATTACHEMENTS 1
-
+#define IDX_VIRT_ATTACHMENTS 1
 #define IDX_VIRT_ITEMS_ALL 2
-
 #define IDX_VIRT_HEADGEAR 3
 #define IDX_VIRT_UNIFORM 4
 #define IDX_VIRT_VEST 5
