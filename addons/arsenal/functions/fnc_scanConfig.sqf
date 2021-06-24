@@ -1,4 +1,5 @@
 #include "script_component.hpp"
+#include "..\defines.hpp"
 /*
  * Author: Dedmen
  * Cache an array of all the compatible items for arsenal.
@@ -51,65 +52,64 @@ private _configCfgWeapons = configFile >> "CfgWeapons"; //Save this lookup in va
             ): {
 
             //Convert type to array index
-            (_cargo select 1) select ([TYPE_OPTICS,TYPE_FLASHLIGHT,TYPE_MUZZLE,TYPE_BIPOD] find _itemInfoType) pushBackUnique _className;
+            (_cargo select IDX_VIRT_ATTACHMENTS) select ([TYPE_OPTICS,TYPE_FLASHLIGHT,TYPE_MUZZLE,TYPE_BIPOD] find _itemInfoType) pushBackUnique _className;
         };
         /* Headgear */
         case (_itemInfoType == TYPE_HEADGEAR): {
-            (_cargo select 3) pushBackUnique _className;
+            (_cargo select IDX_VIRT_HEADGEAR) pushBackUnique _className;
         };
         /* Uniform */
         case (_itemInfoType == TYPE_UNIFORM): {
-            (_cargo select 4) pushBackUnique _className;
+            (_cargo select IDX_VIRT_UNIFORM) pushBackUnique _className;
         };
         /* Vest */
         case (_itemInfoType == TYPE_VEST): {
-            (_cargo select 5) pushBackUnique _className;
+            (_cargo select IDX_VIRT_VEST) pushBackUnique _className;
         };
         /* NVgs */
         case (_simulationType == "NVGoggles"): {
-            (_cargo select 8) pushBackUnique _className;
+            (_cargo select IDX_VIRT_HMDS) pushBackUnique _className;
         };
         /* Binos */
         case (_simulationType == "Binocular" ||
         ((_simulationType == 'Weapon') && {(getNumber (_x >> 'type') == TYPE_BINOCULAR_AND_NVG)})): {
-            (_cargo select 9) pushBackUnique _className;
+            (_cargo select IDX_VIRT_BINOS) pushBackUnique _className;
         };
         /* Map */
         case (_simulationType == "ItemMap"): {
-            (_cargo select 10) pushBackUnique _className;
+            (_cargo select IDX_VIRT_MAP) pushBackUnique _className;
         };
         /* Compass */
         case (_simulationType == "ItemCompass"): {
-            (_cargo select 11) pushBackUnique _className;
+            (_cargo select IDX_VIRT_COMPASS) pushBackUnique _className;
         };
         /* Radio */
         case (_simulationType == "ItemRadio"): {
-            (_cargo select 12) pushBackUnique _className;
+            (_cargo select IDX_VIRT_RADIO) pushBackUnique _className;
         };
         /* Watch */
         case (_simulationType == "ItemWatch"): {
-            (_cargo select 13) pushBackUnique _className;
+            (_cargo select IDX_VIRT_WATCH) pushBackUnique _className;
         };
         /* GPS */
-        case (_simulationType == "ItemGPS"): {
-            (_cargo select 14) pushBackUnique _className;
-        };
-        /* UAV terminals */
-        case (_itemInfoType == TYPE_UAV_TERMINAL): {
-            (_cargo select 14) pushBackUnique _className;
+        case (_simulationType == "ItemGPS" || (_itemInfoType == TYPE_UAV_TERMINAL)): {
+            (_cargo select IDX_VIRT_GPS) pushBackUnique _className;
         };
         /* Weapon, at the bottom to avoid adding binos */
         case (isClass (_x >> "WeaponSlotsInfo") &&
             {getNumber (_x >> 'type') != TYPE_BINOCULAR_AND_NVG}): {
+            private _weaponsArray = _cargo select IDX_VIRT_WEAPONS;
+            private _baseWeapon = _className call bis_fnc_baseWeapon;
+
             switch (getNumber (_x >> "type")) do {
                 case TYPE_WEAPON_PRIMARY: {
-                    (_cargo select 0) select 0 pushBackUnique (_className call bis_fnc_baseWeapon);
-                };
-                case TYPE_WEAPON_HANDGUN: {
-                    (_cargo select 0) select 2 pushBackUnique (_className call bis_fnc_baseWeapon);
+                    _weaponsArray select 0 pushBackUnique _baseWeapon;
                 };
                 case TYPE_WEAPON_SECONDARY: {
-                    (_cargo select 0) select 1 pushBackUnique (_className call bis_fnc_baseWeapon);
+                    _weaponsArray select 1 pushBackUnique _baseWeapon;
+                };
+                case TYPE_WEAPON_HANDGUN: {
+                    _weaponsArray select 2 pushBackUnique _baseWeapon;
                 };
             };
         };
@@ -121,7 +121,7 @@ private _configCfgWeapons = configFile >> "CfgWeapons"; //Save this lookup in va
                 {_itemInfoType in [TYPE_FIRST_AID_KIT, TYPE_MEDIKIT, TYPE_TOOLKIT]} ||
                 {(getText ( _x >> "simulation")) == "ItemMineDetector"}
             ): {
-            (_cargo select 17) pushBackUnique _className;
+            (_cargo select IDX_VIRT_MISCELLANEOUS) pushBackUnique _className;
         };
     };
 } foreach configProperties [_configCfgWeapons, "isClass _x && {(if (isNumber (_x >> 'scopeArsenal')) then {getNumber (_x >> 'scopeArsenal')} else {getNumber (_x >> 'scope')}) == 2} && {getNumber (_x >> 'ace_arsenal_hide') != 1}", true];
@@ -147,27 +147,27 @@ private _putList = [];
                 {!(_className in _grenadeList)} &&
                 {!(_className in _putList)}
             ): {
-            (_cargo select 2) pushBackUnique _className;
+            (_cargo select IDX_VIRT_MAGAZINES) pushBackUnique _className;
         };
         // Grenades
         case (_className in _grenadeList): {
-            (_cargo select 15) pushBackUnique _className;
+            (_cargo select IDX_VIRT_GRENADE) pushBackUnique _className;
         };
         // Put
         case (_className in _putList): {
-            (_cargo select 16) pushBackUnique _className;
+            (_cargo select IDX_VIRT_EXPLOSIVE) pushBackUnique _className;
         };
     };
 } foreach configProperties [(configFile >> "CfgMagazines"), "isClass _x && {(if (isNumber (_x >> 'scopeArsenal')) then {getNumber (_x >> 'scopeArsenal')} else {getNumber (_x >> 'scope')}) == 2} && {getNumber (_x >> 'ace_arsenal_hide') != 1}", true];
 
 {
     if (getNumber (_x >> "isBackpack") == 1) then {
-        (_cargo select 6) pushBackUnique (configName _x);
+        (_cargo select IDX_VIRT_BACKPACK) pushBackUnique (configName _x);
     };
 } foreach configProperties [(configFile >> "CfgVehicles"), "isClass _x && {(if (isNumber (_x >> 'scopeArsenal')) then {getNumber (_x >> 'scopeArsenal')} else {getNumber (_x >> 'scope')}) == 2} && {getNumber (_x >> 'ace_arsenal_hide') != 1}", true];
 
 {
-    (_cargo select 7) pushBackUnique (configName _x);
+    (_cargo select IDX_VIRT_GOGGLES) pushBackUnique (configName _x);
 } foreach configProperties [(configFile >> "CfgGlasses"), "isClass _x && {(if (isNumber (_x >> 'scopeArsenal')) then {getNumber (_x >> 'scopeArsenal')} else {getNumber (_x >> 'scope')}) == 2} && {getNumber (_x >> 'ace_arsenal_hide') != 1}", true];
 
 private _magazineGroups = [[],[]] call CBA_fnc_hashCreate;

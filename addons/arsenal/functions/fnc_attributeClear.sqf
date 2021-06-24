@@ -30,10 +30,10 @@ if (_category == -1) then {
     private _configItems = +(uiNamespace getVariable [QGVAR(configItems), []]);
     private _categoryItems = switch (true) do {
         case (_category < 3): {
-            _configItems select 0 select _category;
+            _configItems select IDX_VIRT_WEAPONS select _category;
         };
         case (_category < 7): {
-            _configItems select 1 select (_category - 3);
+            _configItems select IDX_VIRT_ATTACHMENTS select (_category - 3);
         };
         default {
             _configItems select (_category - 5);

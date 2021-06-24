@@ -164,11 +164,11 @@ switch (_ctrlIDC) do {
         if (_leftPanelState) then {
             {
                 ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-            } foreach (_compatibleItems arrayIntersect (((GVAR(virtualItems) select 1) select 0) apply {toLower _x}));
+            } foreach (_compatibleItems arrayIntersect (((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 0) apply {toLower _x}));
         } else {
             {
                 ["CfgWeapons", _x, false] call _fnc_fill_right_Container;
-            } foreach ((GVAR(virtualItems) select 1) select 0);
+            } foreach ((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 0);
             {
                 ["CfgWeapons", _x, false, true] call _fnc_fill_right_Container;
             } foreach ((GVAR(virtualItems) select 22) select 0);
@@ -179,11 +179,11 @@ switch (_ctrlIDC) do {
         if (_leftPanelState) then {
             {
                 ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-            } foreach (_compatibleItems arrayIntersect (((GVAR(virtualItems) select 1) select 1) apply {toLower _x}));
+            } foreach (_compatibleItems arrayIntersect (((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 1) apply {toLower _x}));
         } else {
             {
                 ["CfgWeapons", _x, false] call _fnc_fill_right_Container;
-            } foreach ((GVAR(virtualItems) select 1) select 1);
+            } foreach ((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 1);
             {
                 ["CfgWeapons", _x, false, true] call _fnc_fill_right_Container;
             } foreach ((GVAR(virtualItems) select 22) select 1);
@@ -194,11 +194,11 @@ switch (_ctrlIDC) do {
         if (_leftPanelState) then {
             {
                 ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-            } foreach (_compatibleItems arrayIntersect (((GVAR(virtualItems) select 1) select 2) apply {toLower _x}));
+            } foreach (_compatibleItems arrayIntersect (((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 2) apply {toLower _x}));
         } else {
             {
                 ["CfgWeapons", _x, false] call _fnc_fill_right_Container;
-            } foreach ((GVAR(virtualItems) select 1) select 2);
+            } foreach ((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 2);
             {
                 ["CfgWeapons", _x, false, true] call _fnc_fill_right_Container;
             } foreach ((GVAR(virtualItems) select 22) select 2);
@@ -209,11 +209,11 @@ switch (_ctrlIDC) do {
         if (_leftPanelState) then {
             {
                 ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-            } foreach (_compatibleItems arrayIntersect (((GVAR(virtualItems) select 1) select 3) apply {toLower _x}));
+            } foreach (_compatibleItems arrayIntersect (((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 3) apply {toLower _x}));
         } else {
             {
                 ["CfgWeapons", _x, false] call _fnc_fill_right_Container;
-            } foreach ((GVAR(virtualItems) select 1) select 3);
+            } foreach ((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 3);
             {
                 ["CfgWeapons", _x, false, true] call _fnc_fill_right_Container;
             } foreach ((GVAR(virtualItems) select 22) select 3);
@@ -224,7 +224,7 @@ switch (_ctrlIDC) do {
         if (_leftPanelState) then {
             {
                 ["CfgMagazines", _x, _ctrlPanel] call FUNC(addListBoxItem);
-            } foreach ((GVAR(virtualItems) select IDX_VIRT_ITEMS_ALL) arrayIntersect _compatibleMagsPrimaryMuzzle);
+            } foreach ((GVAR(virtualItems) select IDX_VIRT_MAGAZINES) arrayIntersect _compatibleMagsPrimaryMuzzle);
         };
     };
 
@@ -232,14 +232,14 @@ switch (_ctrlIDC) do {
         if (_leftPanelState) then {
             {
                 ["CfgMagazines", _x, _ctrlPanel] call FUNC(addListBoxItem);
-            } foreach ((GVAR(virtualItems) select IDX_VIRT_ITEMS_ALL) arrayIntersect _compatibleMagsSecondaryMuzzle);
+            } foreach ((GVAR(virtualItems) select IDX_VIRT_MAGAZINES) arrayIntersect _compatibleMagsSecondaryMuzzle);
         };
     };
 
     case IDC_buttonMag : {
         {
             ["CfgMagazines", _x, true] call _fnc_fill_right_Container;
-        } foreach ((GVAR(virtualItems) select IDX_VIRT_ITEMS_ALL) arrayIntersect _allCompatibleMags);
+        } foreach ((GVAR(virtualItems) select IDX_VIRT_MAGAZINES) arrayIntersect _allCompatibleMags);
         {
             ["CfgMagazines", _x, true, true] call _fnc_fill_right_Container;
         } foreach ((GVAR(virtualItems) select 19) arrayIntersect _allCompatibleMags);
@@ -248,7 +248,7 @@ switch (_ctrlIDC) do {
     case IDC_buttonMagALL : {
         {
             ["CfgMagazines", _x, true] call _fnc_fill_right_Container;
-        } foreach (GVAR(virtualItems) select IDX_VIRT_ITEMS_ALL);
+        } foreach (GVAR(virtualItems) select IDX_VIRT_MAGAZINES);
         {
             ["CfgMagazines", _x, true, true]  call _fnc_fill_right_Container;
         } foreach (GVAR(virtualItems) select 19);
@@ -257,7 +257,7 @@ switch (_ctrlIDC) do {
     case IDC_buttonThrow : {
         {
             ["CfgMagazines", _x, true]  call _fnc_fill_right_Container;
-        } foreach (GVAR(virtualItems) select 15);
+        } foreach (GVAR(virtualItems) select IDX_VIRT_GRENADE);
         {
             ["CfgMagazines", _x, true, true]  call _fnc_fill_right_Container;
         } foreach (GVAR(virtualItems) select 20);
@@ -266,7 +266,7 @@ switch (_ctrlIDC) do {
     case IDC_buttonPut : {
         {
             ["CfgMagazines", _x, true]  call _fnc_fill_right_Container;
-        } foreach (GVAR(virtualItems) select 16);
+        } foreach (GVAR(virtualItems) select IDX_VIRT_EXPLOSIVE);
         {
             ["CfgMagazines", _x, true, true]  call _fnc_fill_right_Container;
         } foreach (GVAR(virtualItems) select 21);
@@ -285,7 +285,7 @@ switch (_ctrlIDC) do {
 
         {
             ["CfgWeapons", _x, false]  call _fnc_fill_right_Container;
-        } forEach ((GVAR(virtualItems) select 17) select {!((toLower _x) in _blockItems)});
+        } forEach ((GVAR(virtualItems) select IDX_VIRT_MISCELLANEOUS) select {!((toLower _x) in _blockItems)});
 
         {
             ["CfgWeapons", _x, false, true]  call _fnc_fill_right_Container;
@@ -307,7 +307,7 @@ switch (_ctrlIDC) do {
                 private _items = _data select 0;
                 {
                     ["CfgWeapons", _x, true] call _fnc_fill_right_Container;
-                } foreach ((GVAR(virtualItems) select 17) select {(toLower _x) in _items});
+                } foreach ((GVAR(virtualItems) select IDX_VIRT_MISCELLANEOUS) select {(toLower _x) in _items});
 
                 {
                     ["CfgWeapons", _x, false, true]  call _fnc_fill_right_Container;

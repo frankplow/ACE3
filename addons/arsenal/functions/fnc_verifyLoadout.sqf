@@ -58,7 +58,7 @@ private _fnc_weaponCheck = {
                     private _mag = _x select 0;
 
                     if (isClass (_magCfg >> _mag)) then {
-                        if !(_mag in (GVAR(virtualItems) select IDX_VIRT_ITEMS_ALL)) then {
+                        if !(_mag in (GVAR(virtualItems) select IDX_VIRT_MAGAZINES)) then {
 
                             _unavailableItemsList pushBackUnique _mag;
                             _dataPath set [_forEachIndex, []];
@@ -137,9 +137,9 @@ for "_dataIndex" from 0 to 9 do {
 
                                         if (isClass (_magCfg >> _item)) then {
                                             if !(
-                                                    _item in (GVAR(virtualItems) select IDX_VIRT_ITEMS_ALL) ||
-                                                    _item in (GVAR(virtualItems) select 15) ||
-                                                    _item in (GVAR(virtualItems) select 16)
+                                                    _item in (GVAR(virtualItems) select IDX_VIRT_MAGAZINES) ||
+                                                    _item in (GVAR(virtualItems) select IDX_VIRT_GRENADE) ||
+                                                    _item in (GVAR(virtualItems) select IDX_VIRT_EXPLOSIVE)
                                                 ) then {
 
                                                 _unavailableItemsList pushBackUnique _item;

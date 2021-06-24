@@ -117,18 +117,18 @@ for "_index" from 0 to 10 do {
                 if (_x isNotEqualTo []) then {
 
                     if (_x select 0 != "") then {
-                        (GVAR(virtualItems) select IDX_VIRT_ITEMS_ALL) pushBackUnique (_x select 0);
+                        (GVAR(virtualItems) select IDX_VIRT_MAGAZINES) pushBackUnique (_x select 0);
                     };
 
                     if (count _x > 1 && {_x select 1 != ""}) then {
-                        (GVAR(virtualItems) select IDX_VIRT_ITEMS_ALL) pushBackUnique (_x select 1);
+                        (GVAR(virtualItems) select IDX_VIRT_MAGAZINES) pushBackUnique (_x select 1);
                     };
                 };
             } forEach _magsArray;
         };
 
         // Inventory items
-        case IDX_VIRT_ITEMS_ALL: {
+        case IDX_VIRT_MAGAZINES: {
                 call FUNC(updateUniqueItemsList);
             };
 

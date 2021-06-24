@@ -36,15 +36,15 @@ if (_category == -1) exitWith {
     {
         // Get appropriate config for each item (different since items can be from any category)
         private _config = switch (true) do {
-            case (_x in (_configItems select 2));
-            case (_x in (_configItems select 15));
-            case (_x in (_configItems select 16)): {
+            case (_x in (_configItems select IDX_VIRT_MAGAZINES));
+            case (_x in (_configItems select IDX_VIRT_GRENADE));
+            case (_x in (_configItems select IDX_VIRT_EXPLOSIVE)): {
                 configFile >> "CfgMagazines" >> _x;
             };
-            case (_x in (_configItems select 6)): {
+            case (_x in (_configItems select IDX_VIRT_BACKPACK)): {
                 configFile >> "CfgVehicles" >> _x;
             };
-            case (_x in (_configItems select 7)): {
+            case (_x in (_configItems select IDX_VIRT_GOGGLES)): {
                 configFile >> "CfgGlasses" >> _x;
             };
             default {
@@ -69,10 +69,10 @@ if (_category == -1) exitWith {
 // Get list of category items
 private _categoryItems = switch (true) do {
     case (_category < 3): {
-        _configItems select 0 select _category;
+        _configItems select IDX_VIRT_WEAPONS select _category;
     };
     case (_category < 7): {
-        _configItems select 1 select (_category - 3);
+        _configItems select IDX_VIRT_ATTACHMENTS select (_category - 3);
     };
     default {
         _configItems select (_category - 5);

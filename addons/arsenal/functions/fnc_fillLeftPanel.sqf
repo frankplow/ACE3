@@ -106,37 +106,37 @@ switch true do {
             case IDC_buttonNVG : {
                 {
                     ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-                } foreach (GVAR(virtualItems) select 8);
+                } foreach (GVAR(virtualItems) select IDX_VIRT_HMDS);
             };
             case IDC_buttonBinoculars : {
                 {
                     ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-                } foreach (GVAR(virtualItems) select 9);
+                } foreach (GVAR(virtualItems) select IDX_VIRT_BINOS);
             };
             case IDC_buttonMap : {
                 {
                     ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-                } foreach (GVAR(virtualItems) select 10);
+                } foreach (GVAR(virtualItems) select IDX_VIRT_MAP);
             };
             case IDC_buttonCompass : {
                 {
                     ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-                } foreach (GVAR(virtualItems) select 11);
+                } foreach (GVAR(virtualItems) select IDX_VIRT_COMPASS);
             };
             case IDC_buttonRadio : {
                 {
                     ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-                } foreach (GVAR(virtualItems) select 12);
+                } foreach (GVAR(virtualItems) select IDX_VIRT_RADIO);
             };
             case IDC_buttonWatch : {
                 {
                     ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-                } foreach (GVAR(virtualItems) select 13);
+                } foreach (GVAR(virtualItems) select IDX_VIRT_WATCH);
             };
             case IDC_buttonGPS : {
                 {
                     ["CfgWeapons", _x, _ctrlPanel] call FUNC(addListBoxItem);
-                } foreach (GVAR(virtualItems) select 14);
+                } foreach (GVAR(virtualItems) select IDX_VIRT_GPS);
             };
             case IDC_buttonFace : {
                 {

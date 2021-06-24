@@ -48,7 +48,7 @@ if (GVAR(shiftState) && {is3DEN}) then {
                 case 0;
                 case 1;
                 case 2:{
-                    GVAR(currentItems) set [_index, ((LIST_DEFAULTS select 0) select _index)];
+                    GVAR(currentItems) set [_index, ((LIST_DEFAULTS select IDX_VIRT_WEAPONS) select _index)];
                 };
                 case 3;
                 case 4;

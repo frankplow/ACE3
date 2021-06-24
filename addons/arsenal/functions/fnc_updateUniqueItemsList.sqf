@@ -21,7 +21,7 @@ GVAR(virtualItems) set [22, [[], [], [], []]];
 GVAR(virtualItems) set [23, []];
 GVAR(virtualItems) set [24, []];
 
-private _array = LIST_DEFAULTS select IDX_VIRT_ITEMS_ALL;
+private _array = LIST_DEFAULTS select IDX_VIRT_MAGAZINES;
 private _itemsCache = uiNamespace getVariable QGVAR(configItems);
 
 private _configCfgWeapons = configFile >> "CfgWeapons";
@@ -35,7 +35,7 @@ private _configGlasses = configFile >> "CfgGlasses";
         case (
                 isClass (_configMagazines >> _x) && 
                 {_x in (_itemsCache select 2)} && 
-                {!(_x in (GVAR(virtualItems) select IDX_VIRT_ITEMS_ALL))}
+                {!(_x in (GVAR(virtualItems) select IDX_VIRT_MAGAZINES))}
             ): {
             (GVAR(virtualItems) select 19) pushBackUnique _x;
         };
@@ -43,8 +43,8 @@ private _configGlasses = configFile >> "CfgGlasses";
         // Mag throw
         case (
                 isClass (_configMagazines >> _x) && 
-                {_x in (_itemsCache select 15)} &&
-                {!(_x in (GVAR(virtualItems) select 15))}
+                {_x in (_itemsCache select IDX_VIRT_GRENADE)} &&
+                {!(_x in (GVAR(virtualItems) select IDX_VIRT_GRENADE))}
             ): {
             (GVAR(virtualItems) select 20) pushBackUnique _x;
         };
@@ -52,13 +52,13 @@ private _configGlasses = configFile >> "CfgGlasses";
         // Mag put
         case (
                 isClass (_configMagazines >> _x) && 
-                {_x in (_itemsCache select 16)} &&
-                {!(_x in (GVAR(virtualItems) select 16))}
+                {_x in (_itemsCache select IDX_VIRT_EXPLOSIVE)} &&
+                {!(_x in (GVAR(virtualItems) select IDX_VIRT_EXPLOSIVE))}
             ): {
             (GVAR(virtualItems) select 21) pushBackUnique _x;
         };
 
-        // acc
+        // Optic
         case (
                 isClass (_configCfgWeapons >> _x) &&
                 {!(_x in ((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 0))} &&
@@ -67,7 +67,7 @@ private _configGlasses = configFile >> "CfgGlasses";
             ((GVAR(virtualItems) select 22) select 0) pushBackUnique _x;
         };
 
-        // acc
+        // Flashlight
         case (
                 isClass (_configCfgWeapons >> _x) &&
                 {!(_x in ((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 1))} &&
@@ -76,7 +76,7 @@ private _configGlasses = configFile >> "CfgGlasses";
             ((GVAR(virtualItems) select 22) select 1) pushBackUnique _x;
         };
 
-        // acc
+        // Muzzle device
         case (
                 isClass (_configCfgWeapons >> _x) &&
                 {!(_x in ((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 2))} &&
@@ -84,7 +84,7 @@ private _configGlasses = configFile >> "CfgGlasses";
             ): {
             ((GVAR(virtualItems) select 22) select 2) pushBackUnique _x;
         };
-        // acc
+        // Bipod
         case (
                 isClass (_configCfgWeapons >> _x) &&
                 {!(_x in ((GVAR(virtualItems) select IDX_VIRT_ATTACHMENTS) select 3))} &&
@@ -96,7 +96,7 @@ private _configGlasses = configFile >> "CfgGlasses";
         // Misc
         case (
                 isClass (_configCfgWeapons >> _x) &&
-                {!(_x in (GVAR(virtualItems) select 17))} &&
+                {!(_x in (GVAR(virtualItems) select IDX_VIRT_MISCELLANEOUS))} &&
                 {!(_x in ((_itemsCache select 1) select 0))} &&
                 {!(_x in ((_itemsCache select 1) select 1))} &&
                 {!(_x in ((_itemsCache select 1) select 2))} &&

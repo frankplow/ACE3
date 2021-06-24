@@ -26,9 +26,9 @@ if (isNil "_importList" || {!(_importList isEqualType [])} || {!(_importList isE
 
 // Ensure imported items are in scanned config array and classname case is correct
 private _configItems = +(uiNamespace getVariable [QGVAR(configItems), []]);
-private _configItemsFlat = _configItems select [2, 16];
-_configItemsFlat append (_configItems select 0);
-_configItemsFlat append (_configItems select 1);
+private _configItemsFlat = _configItems select [IDX_VIRT_MAGAZINES, IDX_VIRT_EXPLOSIVE];
+_configItemsFlat append (_configItems select IDX_VIRT_WEAPONS);
+_configItemsFlat append (_configItems select IDX_VIRT_ATTACHMENTS);
 
 private _filteredList = [];
 
