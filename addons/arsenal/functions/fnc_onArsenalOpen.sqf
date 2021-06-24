@@ -43,8 +43,26 @@ if (isNil QGVAR(defaultLoadoutsList)) then {
 };
 
 if (isNil QGVAR(virtualItems)) then {
-    GVAR(virtualItems) = [[[], [], []], [[], [], [], []], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
-};
+    GVAR(virtualItems) = [
+        [[], [], []], // Weapons 0, primary, secondary, handgun
+        [[], [], [], []], // WeaponAccessories 1, optic,side,muzzle,bipod
+        [ ], // Magazines 2
+        [ ], // Headgear 3
+        [ ], // Uniform 4
+        [ ], // Vest 5
+        [ ], // Backpacks 6
+        [ ], // Goggles 7
+        [ ], // NVGs 8
+        [ ], // Binoculars 9
+        [ ], // Map 10
+        [ ], // Compass 11
+        [ ], // Radio slot 12
+        [ ], // Watch slot  13
+        [ ], // Comms slot 14
+        [ ], // WeaponThrow 15
+        [ ], // WeaponPut 16
+        [ ] // InventoryItems 17
+]};
 
 GVAR(currentItems) = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], [], [], [], [], []];
 
@@ -123,6 +141,19 @@ for "_index" from 0 to 10 do {
         };
     };
 };
+
+{
+    private _simulationType = getText (configFile >> "CfgWeapons" >> _x >> "simulation");
+
+    if (_simulationType != "NVGoggles") then {
+        if (_simulationType == "ItemGps" || _simulationType == "Weapon") then {
+            (GVAR(virtualItems) select IDX_VIRT_GPS) pushBackUnique _x;
+        } else {
+            private _index = 10 + (["ItemMap", "ItemCompass", "ItemRadio", "ItemWatch"] find _simulationType);
+            (GVAR(virtualItems) select _index) pushBackUnique _x;
+        };
+    };
+} forEach (assignedItems GVAR(center));
 
 // Fill current items
 for "_index" from 0 to 15 do {
